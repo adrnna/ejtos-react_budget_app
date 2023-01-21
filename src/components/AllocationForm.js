@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
 
+
+const AllocationForm = (props) => {
+    const { currency,dispatch,remaining  } = useContext(AppContext);
+    
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
-
+    
     const submitEvent = () => {
 
             if(cost > remaining) {
@@ -15,6 +17,8 @@ const AllocationForm = (props) => {
                 setCost("");
                 return;
             }
+
+            
 
         const expense = {
             name: name,
@@ -59,14 +63,18 @@ const AllocationForm = (props) => {
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
 
-                    <input
+                  <label className="input-group-prepend" style={{ marginLeft: '1rem' }}>{currency}</label>   
+                   <input
                         required='required'
                         type='number'
                         id='cost'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ marginLeft: '0.3rem' , size: 10}}
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
+                    
+
+                      
 
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                         Save
